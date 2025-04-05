@@ -1,11 +1,23 @@
-import React from 'react';
+import React from "react";
+import { motion } from "framer-motion";
 
 const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 px-4 overflow-y-auto">
-      <div className="bg-main w-full max-w-[700px] p-12 rounded-lg border-2 border-mainbr shadow-lg relative max-h-[90vh] overflow-y-auto">
+    <div 
+      className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-md z-50 px-4 overflow-y-auto"
+      onClick={onClose} // Close when clicking outside
+    >
+      {/* Animated Modal Container */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bg-main w-full max-w-[700px] p-12 rounded-lg border-2 border-mainbr shadow-lg relative max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+      >
         {/* Close Button */}
         <p 
           className="absolute top-4 right-4 text-copy-primary hover:text-copy-secondary text-3xl font-bold cursor-pointer"
@@ -18,7 +30,7 @@ const ProjectModal = ({ project, onClose }) => {
         <img 
           src={project.image} 
           alt={project.title} 
-          className="w-full h-[300px] object-cover rounded-md mb-4"
+          className="w-full h-[300px] object-fill rounded-md mb-4"
         />
 
         {/* Modal Content */}
@@ -58,7 +70,7 @@ const ProjectModal = ({ project, onClose }) => {
             View on GitHub
           </a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

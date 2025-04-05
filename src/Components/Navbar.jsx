@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/button.css';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Track menu state
@@ -26,14 +27,39 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex w-full justify-between items-center h-16">
+      <div className="flex w-full justify-between items-center h-16 mt-3">
         {/* Logo */}
-        <div>
-          <h1 className="text-xl font-bold text-copy-primary">Logo</h1>
-        </div>
+        <motion.div
+        initial={{ x: -50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="flex justify-between items-center"
+      >
+        {isDark ? (
+          <img
+            src="logo-b.png"
+            alt="Logo"
+            className="h-[60px] object-contain rounded-xl ring-1 shadow-lg shadow-mainbr ring-mainbr/20 
+                        backdrop-blur-sm dark:bg-main dark:text-copy-primary dark:ring-white/10 
+                        border-2 border-mainbr dark:border-mainbr"
+          />
+        ) : (
+          <img
+            src="logo-l.png"
+            alt="Logo"
+            className="h-[60px] object-contain rounded-xl ring-1 shadow-lg shadow-mainbr ring-mainbr/20 
+                        backdrop-blur-sm dark:bg-main dark:text-copy-primary dark:ring-white/10 
+                        border-2 border-mainbr dark:border-mainbr"
+          />
+        )}
+      </motion.div>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex justify-center">
+      <motion.nav
+          // initial={{ y: -30, opacity: 0 }} // Starts 30px above & invisible
+          // animate={{ y: 0, opacity: 1 }}  // Moves to normal position & fades in
+          // transition={{ duration: 0.8, ease: "easeOut" }} // Smooth animation
+          className="hidden md:flex justify-center"
+        >
           <ul className="flex items-center lg:text-base rounded-full bg-main px-5 text-sm font-semibold text-copy-primary ring-1 shadow-lg shadow-mainbr ring-mainbr/20 backdrop-blur-sm dark:bg-main dark:text-copy-primary dark:ring-white/10 border-2 border-mainbr dark:border-mainbr">
             <li>
               <Link className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400" to="/">
@@ -51,10 +77,15 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-        </nav>
+        </motion.nav>
 
-        {/* Right Section: Mobile Menu & Theme Toggle */}
-        <div className="flex justify-end gap-4">
+
+        <motion.div
+          initial={{ x: 50, opacity: 0 }} // Starts from 50px right & invisible
+          animate={{ x: 0, opacity: 1 }}  // Moves to its normal place & fades in
+          transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
+          className="flex justify-end gap-4"
+        >
           {/* Mobile Menu Button */}
           <button
             className="md:hidden group flex items-center rounded-full bg-main px-4 py-2 font-medium text-copy-primary ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-main dark:text-copy-primary dark:ring-white/10"
@@ -108,12 +139,12 @@ const Navbar = () => {
               ></path>
             </svg>
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden fixed top-16 left-0 w-full bg-main border-t border-mainbr backdrop-blur-sm dark:bg-main dark:border-mainbr">
+        <div className="md:hidden fixed top-16 right-24 w-[200px] mt-8 bg-main border-2 rounded-2xl border-mainbr backdrop-blur-sm dark:bg-main dark:border-mainbr">
           <ul className="flex flex-col items-center gap-4 py-4 text-copy-primary dark:text-copy-primary">
             <li>
               <Link className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400" to="/" onClick={() => setIsOpen(false)}>

@@ -39,7 +39,7 @@ function App() {
     <>
       <div className="bg-main ml-5 mr-5 px-10 md:px-24 md:py-1 md:ml-20 md:mr-20 border-4 border-mainbr overflow-hidden">
         <Router>
-          <ScrollToTop />
+          {/* <ScrollToTop /> */}
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
