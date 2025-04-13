@@ -14,7 +14,7 @@ const projects = [
     title: "TimePensieve",
     language: "JavaScript",
     description: "A platform to send letters to your future self with scheduled email delivery.",
-    longDescription: "TimePensieve is a unique platform that allows users to write letters to their future selves, preserving memories and emotions for a future date. The letters are scheduled for email delivery using Firebase Firestore for real-time data management and EmailJS for seamless email integration. Built during a 48-hour hackathon, this project leverages Firebase Authentication for secure sign-ins and offers users the option to add photos or videos to their letters. TimePensieve combines nostalgia with technology, enabling users to send messages to their future selves.",
+    longDescription: "TimePensieve is a unique platform that allows users to write letters to their future selves, preserving memories and emotions for a future date. The letters are scheduled for email delivery using a cron job, integrated with Firebase Firestore for real-time data management and EmailJS for seamless email integration. Built during a 48-hour hackathon, this project leverages Firebase Authentication for secure sign-ins. TimePensieve combines nostalgia with technology, enabling users to send messages to their future selves.",
     githubUrl: "https://github.com/JayD2003/BUILD-A-SITE-Hackthon",
     liveUrl: "https://time-capsule-45314.web.app/",
     category: "fullstack",
