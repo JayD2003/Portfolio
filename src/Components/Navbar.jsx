@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/button.css';
 import { motion } from 'framer-motion';
@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Track menu state
   const [isDark, setIsDark] = useState(false); // Track current theme state
+  const menuRef = useRef(null); // Reference to the menu element
 
   // Load theme from localStorage on page load
   useEffect(() => {
@@ -16,6 +17,23 @@ const Navbar = () => {
     document.body.classList.toggle('dark', isDarkMode);
     setIsDark(isDarkMode);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+  
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+  
 
   const handleThemeToggle = () => {
     const newTheme = isDark ? 'light' : 'dark';
@@ -144,7 +162,9 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden fixed top-16 right-24 w-[200px] mt-8 bg-main border-2 rounded-2xl border-mainbr backdrop-blur-sm dark:bg-main dark:border-mainbr">
+        <div
+          ref={menuRef} // Attach the ref to the menu element 
+          className="md:hidden fixed top-16 right-24 w-[200px] mt-8 bg-main border-2 rounded-2xl border-mainbr backdrop-blur-sm dark:bg-main dark:border-mainbr">
           <ul className="flex flex-col items-center gap-4 py-4 text-copy-primary dark:text-copy-primary">
             <li>
               <Link className="relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400" to="/" onClick={() => setIsOpen(false)}>

@@ -49,7 +49,7 @@ const Hero = () => {
       {links.map((link, index) => (
         <motion.a
           key={index}
-          className="group -m-1 p-1"
+          className="group -m-1 p-1 flex flex-row justify-center align-middle gap-1 font-body"
           href={link.url}
           target="_blank"
           aria-label={`Follow on ${link.label}`}
